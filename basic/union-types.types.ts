@@ -1,6 +1,6 @@
 // UNION TYPES
 
-function combine(input1: number | string, input2: number | string) {
+function combinee(input1: number | string, input2: number | string) {
     let res;
     if(typeof input1 === 'number' && typeof input2 === 'number') {
          res = input1 + input2;
@@ -11,8 +11,8 @@ function combine(input1: number | string, input2: number | string) {
   }
 
 
-  const combinedAges = combine(30, 26);
+  const combinedAges = combinee(30, 26);
 console.log(combinedAges);
 
-const combinedNames = combine('Max', 'Anna');
+const combinedNames = combinee('Max', 'Anna');
 console.log(combinedNames);

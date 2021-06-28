@@ -1,10 +1,10 @@
 // FUNCTIONS return types & void
 
-function add(n1: number, n2: number) {
+function adds(n1: number, n2: number) {
     return n1 + n2;
 }
 // i IGNORE the result of this fun
-function printResult(num: number): void {
+function printResults(num: number): void {
     console.log(`Result: ${num}`);
 }
 
@@ -19,11 +19,11 @@ function printResult2(num: number): undefined {
 }
 
 
-printResult(add(5, 12));
+printResults(adds(5, 12));
 
 let combineValues: (a: number, b: number) => number;
 
-combineValues = add;
+combineValues = adds;
 /* combineValues = printResult; */
 console.log(combineValues(8, 8));
 
