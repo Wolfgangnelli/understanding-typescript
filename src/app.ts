@@ -1,34 +1,31 @@
+class Department {
+  /*  private readonly id: number;
+   private name: string; */
+   private employees: string[] = [];
 
+    constructor(private readonly id: number, public name: string) {
+       /*  this.id = id;
+        this.name = n; */
+    }
 
-/* const add =  (a: number, b: number = 1) => a + b;
+    describe(this: Department) {
+        console.log(`Department ${this.id}: ${this.name.toUpperCase()}`);
+    }
 
-const printOutput: (a: number | string) => void = output => console.log(output); 
+    addEmployee(employee: string) {
+        this.employees = [...this.employees, employee];
+    }
 
-printOutput(add(5,2)); */
-
-const hobbies = ['Sports', 'Cooking'];
-const activeHobbies = ['Hiking', ...hobbies];
-
-// activeHobbies.push(...hobbies);
-console.log(activeHobbies);
-
-const person = {
-    firstName: 'Andrew',
-    age: 30
-}
-// spread operator
-const copiedPerson = {...person};
-
-// rest parameters
-const add = (...numbers: number[]) => {  
- return numbers.reduce((p, c) => p + c, 0);
-   
+    showEmployees() {
+        console.log(this.employees.length);
+        console.log(this.employees);
+    }
 }
 
-const addedNumbers = add(5, 10, 2);
-console.log(addedNumbers);
 
-const [hobby1, hobby2, ...remainingHobbies] = hobbies;
-console.log(hobbies, hobby1, hobby2);
+const accounting = new Department(1, 'Accounting');
+accounting.describe();
+accounting.addEmployee('Pippo');
+accounting.addEmployee('Pluto');
+accounting.showEmployees();
 
-const { firstName, age } = person;
