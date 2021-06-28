@@ -27,13 +27,13 @@ function combine(input1: NumStr, input2: NumStr, resultConversion: ConversionDes
   console.log(greeting);
 
 
-  const combinedAges = combine(30, 26, 'as-number');
-  console.log(combinedAges);
+  const combinedAgess = combine(30, 26, 'as-number');
+  console.log(combinedAgess);
   
   const combinedStringAges = combine('30', '26', 'as-number');
   console.log(combinedStringAges);
   
 
-  const combinedNames = combine('Max', 'Anna', 'as-text');
-  console.log(combinedNames);
+  const combinedNamess = combine('Max', 'Anna', 'as-text');
+  console.log(combinedNamess);
   
