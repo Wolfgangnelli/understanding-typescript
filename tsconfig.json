@@ -77,6 +77,7 @@
   "exclude": [
     "basic",
     "classes&interfaces",
+    "advancedTypes",
     "*.types.ts",   //ogni file con questa estensione deve essere ignorato
     "**/*.dev.ts", //ogni file con questa estensione in ogni cartella deve essere ignorato 
    // "node_modules" // would be the default
