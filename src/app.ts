@@ -1,89 +1,106 @@
-// An interface describe a structure of an object that i can use for describe as un object should be appear.
-// For example for describe a structure of a Model that is stored in my backend 
-// Posso implement un o piu interface in una class
-// Consentono di condividere funzionalità tra diverse classi, riguardo la struttura e caratteristiche che dovrebbero avere, impongo alle classi di avere una certa struttura
-// Un interface puo extends un altra interface, vale diciamo il concetto di ereditarietà
-
-// Simile a un type personalizzato
-/* type Persona = {
+// Intersection types
+type Admin = {
     name: string;
-    age: number;
+    privileges: string[];
+}
 
-    greet(phrase: string): void;
-} */
-
-/* interface Person {
+type Employee = {
     name: string;
-    age: number;
+    startDate: Date;
+}
 
-    greet(phrase: string): void;
-} 
+// combine two types, Intersection types
+type ElevatedEmployee = Admin & Employee;
 
-let user1: Greetable;
+const e1: ElevatedEmployee = {
+    name: 'Max',
+    privileges: ['create-server'],
+    startDate: new Date()
+}
 
-user1 = {
-    name: 'Andrea',
+type Combinable = string | number;
+type Numeric = number | boolean;
+type Universal = Combinable & Numeric;
 
-    greet(phrase: string) {
-        console.log(phrase + ' ' + this.name + '!');
+function add(a: Combinable, b: Combinable) {
+    // type guard using typeof
+    if(typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInfo(emp: UnknownEmployee) {
+    console.log(`Name: ${emp.name}`);
+    // type guard, check if privilege props is in emp obj type
+    if('privileges' in emp) {
+        console.log(`Privileges: ${emp.privileges}`)
+    }
+    if('startDate' in emp) {
+        console.log(`Start date: ${emp.startDate}`)
+    }
+}
+printEmployeeInfo(e1);
+
+// With class
+class Car {
+    drive() {
+        console.log('Drivingj...')
     }
 }
 
-user1.greet('Hi there - I am');
-
-*/
-
-
-// Interface as Function type
-//type AddFn = (a: number, b: number) => number;
-interface AddFn {
-    (a: number, b: number): number;
-}
-
-let add: AddFn;
-
-add = (a: number, b: number) => {
-    return a+b;
-}
-
-// end interface as function
-
-interface Named {
-    readonly name?: string;
-    // Optional property   propName?: type;  and method   myMethod?(): void;
-    outputName?: string;
-}
-
-interface Greetable extends Named {
-
-    greet(phrase: string): void;
-}
-
-class Person implements Greetable {
-    public name?: string
-    age: number = 30;
-    
-    // Option parameters 
-    constructor(name?: string) {
-        if(name) {
-            this.name = name;
-        }
+class Truck {
+    drive() {
+        console.log('Driving a truck...')
     }
-
-    greet(phrase: string) {
-        if(this.name) {
-            console.log(`${phrase} ${this.name}!`);
-        } else {
-            console.log('Hi!');
-        }
+    loadCargo(amount: number) {
+        console.log(`Loading cargo... ${amount}`)
     }
 }
 
-let user1: Greetable;
+type Vehicle = Car | Truck;
 
-user1 = new Person();
-let user2 = new Person('Max');
-// user1.name = 'Pippo';
-user1.greet('Hi there - I am');
-user2.greet('Hi there - I am');
+const v1 = new Car();
+const v2 = new Truck();
 
+function useVehicle(vehicle: Vehicle) {
+    vehicle.drive();
+    // guard, check if vehicle is an istance of Truck
+    if(vehicle instanceof Truck) {
+        vehicle.loadCargo(1000);
+    }
+}
+
+useVehicle(v1);
+useVehicle(v2);
+
+// Discriminated Unions using prop typw in an Interface
+interface Bird {
+    type: 'bird';
+    flyingSpeed: number;
+}
+interface Horse {
+    type: 'horse';
+    runningSpeed: number;
+}
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+    let speed;
+    let name = animal.type.charAt(0).toUpperCase() + animal.type.slice(1);
+    switch (animal.type) {
+        case 'bird':
+            speed = animal.flyingSpeed;
+            break;
+        case 'horse':
+            speed = animal.runningSpeed;
+            break;
+        default:
+            break;
+    }
+    console.log(`${name} moving at speed: ${speed}`)
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 50});
