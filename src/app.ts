@@ -3,10 +3,10 @@
 function Logger(logString: string) {
     console.log('LOGGER FACTORY');
     // Decorator factories/function, now i can pass parameter to decorator function @Logger(params)
-   /*  return function(_: Function) {
-        console.log(logString);
-    } */
-    return function(constructor: Function) {
+    /*  return function(_: Function) {
+         console.log(logString);
+     } */
+    return function (constructor: Function) {
         console.log(logString);
         console.log(constructor);
     }
@@ -14,7 +14,7 @@ function Logger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
     console.log('TEMPLATE FACTORY');
-    return function(constructor: any) {
+    return function (constructor: any) {
         console.log('Rendering template');
         const hookEm = document.getElementById(hookId);
         const p = new constructor();
@@ -75,7 +75,7 @@ class Product {
     // Add Decorator a un accessor
     @Log2
     set price(val: number) {   // Accessor
-        if(val > 0) {
+        if (val > 0) {
             this._price = val;
         } else {
             throw new Error('Invalid price, should be positive!');
@@ -89,6 +89,9 @@ class Product {
     // Add Decorator a un method
     @Log3
     getPriceWithTax(@Log4 tax: number) {
-        return this._price * (1+tax);
+        return this._price * (1 + tax);
     }
 }
+
+const p1 = new Product('Book', 19);
+const p2 = new Product('Book', 29);
