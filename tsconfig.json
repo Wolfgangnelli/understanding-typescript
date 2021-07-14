@@ -78,6 +78,7 @@
     "basic",
     "classes&interfaces",
     "advancedTypes",
+    "decorators",
     "generics",
     "*.types.ts",   //ogni file con questa estensione deve essere ignorato
     "**/*.dev.ts", //ogni file con questa estensione in ogni cartella deve essere ignorato 
